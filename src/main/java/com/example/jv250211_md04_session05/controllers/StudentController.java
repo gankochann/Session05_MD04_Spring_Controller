@@ -59,10 +59,12 @@ public class StudentController {
 
     @GetMapping("/search")
     public String search(@RequestParam(name = "search") String search,
+                         @RequestParam(name = "sort",defaultValue = "ASC") String sort,
                          Model model){
-        List<Students> students = studentService.searchStudentByName(search);
+        List<Students> students = studentService.searchStudentByName(search, sort);
         model.addAttribute("students", students);
         model.addAttribute("search", search);
+        model.addAttribute("sort" , sort);
         return "students";
     }
 

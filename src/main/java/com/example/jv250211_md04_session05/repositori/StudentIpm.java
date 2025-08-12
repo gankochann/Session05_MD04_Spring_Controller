@@ -135,7 +135,7 @@ public class StudentIpm implements StudentDAO{
     }
 
     @Override
-    public List<Students> searchStudentByName(String name) {
+    public List<Students> searchStudentByName(String name ) {
         Connection conn = null;
         CallableStatement callstm = null;
         List<Students> list = null;

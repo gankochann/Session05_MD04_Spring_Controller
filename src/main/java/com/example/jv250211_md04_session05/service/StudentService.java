@@ -6,7 +6,9 @@ import com.example.jv250211_md04_session05.repositori.StudentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -56,8 +58,12 @@ public class StudentService {
         return studentDAO.findById(id);
     };
 
-    public List<Students> searchStudentByName(String name){
-        return studentDAO.searchStudentByName(name);
+    public List<Students> searchStudentByName(String name, String sort){
+        List<Students> list = studentDAO.searchStudentByName(name);
+        if(sort.equalsIgnoreCase("desc")){
+            list=list.stream().sorted(Comparator.comparing(Students::getAvgMark).reversed()).collect(Collectors.toList());
+        }
+        return list;
     };
 
     public StudentDTO convertStudenttoStudentDTO(Students students){
